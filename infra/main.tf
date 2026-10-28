@@ -1,14 +1,20 @@
-resource "kind_cluster" "this" {
-  name           = "plateforme"
-  wait_for_ready = true
+module "cluster" {
+  source = "./modules/cluster"
+  nom    = "plateforme"
 }
 
-resource "helm_release" "argocd" {
-  name             = "argocd"
-  namespace        = "argocd"
-  create_namespace = true
-  repository       = "https://argoproj.github.io/argo-helm"
-  chart            = "argo-cd"
-  version          = "10.10.3"
-  timeout          = 600
+module "argocd" {
+  source        = "./modules/argocd"
+  version_chart = "10.10.3"
+  depends_on    = [module.cluster]
+}
+
+moved {
+  from = kind_cluster.this
+  to   = module.cluster.kind_cluster.this
+}
+
+moved {
+  from = helm_release.argocd
+  to   = module.argocd.helm_release.argocd
 }
