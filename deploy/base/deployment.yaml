@@ -17,6 +17,10 @@ spec:
       containers:
         - name: api
           image: api
+          envFrom:
+            - secretRef:
+                name: api-secret
+                optional: true
           ports:
             - name: http
               containerPort: 8080
