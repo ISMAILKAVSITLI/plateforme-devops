@@ -6,7 +6,7 @@ resources:
 images:
   - name: api
     newName: ghcr.io/ismailkavsitli/plateforme-devops
-    newTag: initial
+    newTag: fd1a6b89
 replicas:
   - name: api
     count: 2
