@@ -5,6 +5,7 @@ resources:
   - ../../base
 images:
   - name: api
+    newName: ghcr.io/ismailkavsitli/plateforme-devops
     newTag: initial
 replicas:
   - name: api
